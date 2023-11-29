@@ -22,9 +22,17 @@ make
 
 ### Device-tree bindings
 
-* Use these device-tree bindings to instantiate driver
+* Use this device-tree overlay to instantiate driver
 ```
-	ccm_clko: clock-ccm-cko1 {
+#include <dt-bindings/clock/imx93-clock.h>
+#include <dt-bindings/gpio/gpio.h>
+#include "imx93-pinfunc.h"
+
+/dts-v1/;
+/plugin/;
+
+&{/} {
+	clock-ccm-cko1 {
 		compatible = "nxp,imx93-ccm-clko";
 		assigned-clocks = <&clk IMX93_CLK_CCM_CKO1>;
 		assigned-clock-parents = <&clk IMX93_CLK_AUDIO_PLL>;
@@ -32,9 +40,19 @@ make
 		clocks = <&clk IMX93_CLK_CCM_CKO1>;
 		clock-names = "ccm_cko1";
 		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_ccm_clkout>;
+		pinctrl-0 = <&pinctrl_ccm_clko1>;
 		status = "okay";
 	};
+};
+
+&iomuxc {
+	pinctrl_ccm_clko1: ccmclko1grp {
+		fsl,pins = <
+			MX93_PAD_CCM_CLKO1__CCMSRCGPCMIX_CLKO1	0x1FE
+		>;
+	};
+};
+
 ```
 
 ### Loading driver
