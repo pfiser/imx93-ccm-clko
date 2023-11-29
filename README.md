@@ -55,6 +55,11 @@ $ dmesg | grep -i ccm
 [    1.343664] imx93-ccm-clko clock-ccm-cko1: Clock rate = 24576000
 ```
 
+### Oscilloscope output
+
+* Connect probe to CCM_CLKO1 (or other CCM_CLKO pad defined in dts) and observe signal
+![Oscilloscope output](imx93-ccm-clko.bmp)
+
 ## Authors
 
 Primoz Fiser <primoz.fiser@norik.com>
